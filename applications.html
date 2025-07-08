@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="KYGnus - Convert old hardware into powerful NAS, Firewall, and Media Server solutions">
+    <meta name="author" content="KYGnus Team">
+
+    <!-- OG Meta Tags -->
+    <meta property="og:site_name" content="KYGnus" />
+    <meta property="og:site" content="https://kygnus.example.com" />
+    <meta property="og:title" content="IT Infrastructure Solutions | KYGnus"/>
+    <meta property="og:description" content="Transform old computers into NAS, Firewall, and Media Server solutions" />
+    <meta property="og:image" content="https://kygnus.example.com/images/og-image.jpg" />
+    <meta property="og:url" content="https://kygnus.example.com" />
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Webpage Title -->
+    <title>KYGnus | Applications</title>
+    
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="css/swiper.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    
+    <style>
+        /* Application Showcase Styles */
+        .app-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .app-card {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .app-card:hover {
+            transform: translateY(-5px);
+        }
+        .app-header {
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+        .nas-header {
+            background-color: #3498db; /* NAS blue */
+        }
+        .firewall-header {
+            background-color: #b11d0d; /* Firewall red */
+        }
+        .media-header {
+            background-color: #ea6112; /* Media green */
+        }
+        .app-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        .app-body {
+            padding: 20px;
+            background: white;
+        }
+        .app-screenshot {
+            width: 100%;
+            border-bottom: 1px solid #eee;
+        }
+        .feature-box {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .feature-icon {
+            font-size: 1.5rem;
+            color: #3498db;
+            margin-right: 15px;
+        }
+        @media (max-width: 768px) {
+            .app-card {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-dark" aria-label="Main navigation">
+        <div class="container">
+            <a class="navbar-brand logo-image" href="index.html">KYGnus</a>
+            <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav ms-auto navbar-nav-scroll">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#header">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#solutions">Solutions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#technology">Technology</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#compliance">Compliance</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="applications.html">Applications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                <span class="nav-item social-icons">
+                    <span class="fa-stack">
+                        <a href="https://github.com/KYGnus">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-github fa-stack-1x"></i>
+                        </a>
+                    </span>
+                    <span class="fa-stack">
+                        <a href="#your-link">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-linkedin fa-stack-1x"></i>
+                        </a>
+                    </span>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="ex-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-10 offset-xl-1">
+                    <h1>Developed Application</h1>
+                    <p class="p-large" style="color:white;">for Enterprise level Managements and Home Level to Transform old hardware into powerful network applications</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Application Showcase -->
+    <div id="solutions" class="basic-2 pt-5 pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-10 offset-xl-1">
+                    <h2 class="text-center mb-5">Our Application Solutions</h2>
+                    
+                    <div class="app-showcase">
+                        <!-- NAS Storage Card -->
+                        <div class="app-card">
+                            <div class="app-header nas-header">
+                                <i class="fas fa-database app-icon"></i>
+                                <h3>NAS Storage</h3>
+                            </div>
+                            <img src="images/mynas2.png" alt="NAS Web Interface" class="app-screenshot">
+                            <img src="images/mynas_cmd.png" alt="NAS commandline Interface" class="app-screenshot">
+                            <div class="app-body">
+                                <h4>Network Attached Storage</h4>
+                                <p>Convert old servers into powerful NAS solutions with:</p>
+                                <ul>
+                                    <li>All Linux Supported filesystem support</li>
+                                    <li>RAID configuration</li>
+                                    <li>Remote access with Creative method</li>
+                                    <li>backups and clone</li>
+                                    <li>powerfull Malware Scanning</li>
+                                    <li>Add Modular Applications for Security and Management</li>
+                                </ul>
+                                <div class="text-center mt-3">
+                                    <a href="https://github.com/KYGnus/mynas" class="btn btn-primary">Learn More</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Firewall Card -->
+                        <div class="app-card">
+                            <div class="app-header firewall-header">
+                                <i class="fas fa-shield-alt app-icon"></i>
+                                <h3>Firewall</h3>
+                            </div>
+                            <img src="images/freeutm1.png" alt="Firewall Dashboard" class="app-screenshot">
+                            <div class="app-body">
+                                <h4>Network Security</h4>
+                                <p>Turn old PCs into secure firewall appliances with:</p>
+                                <ul>
+                                    <li>Manage Firewall and Port Scanning Detection</li>
+                                    <li>Intrusion detection</li>
+                                    <li>VPN support</li>
+                                    <li>control Bandwidth</li>
+                                    <li>Monitoring</li>
+                                    <li>Thread Detection</li>
+                                </ul>
+                                <div class="text-center mt-3">
+                                    <a href="https://github.com/KYGnus/myUTM" class="btn btn-danger">Learn More</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Media Server Card -->
+                        <div class="app-card">
+                            <div class="app-header media-header">
+                                <i class="fas fa-film app-icon"></i>
+                                <h3>Media Server</h3>
+                            </div>
+                             <img src="images/media_serrver1.png" alt="Media Server Interface" class="app-screenshot">
+                            <img src="images/mediaserver2.png" alt="Media Server Interface" class="app-screenshot">
+                            <div class="app-body">
+                                <h4>Home Entertainment</h4>
+                                <p>Create media centers from old hardware with:</p>
+                                                <ul>
+                                                    <li><strong style="font-weight:bold;">4K transcoding capabilities:</strong> with hardware acceleration</li>
+                                                    
+                                                    <li>🔒 <strong style="font-weight:bold;">Enterprise-grade Security:</strong>
+                                                        <ul>
+                                                            <li><strong style="font-weight:bold;">Hardened OS:</strong> Specially configured for media hosting</li>
+                                                            <li><strong style="font-weight:bold;">Custom Tools Support:</strong> Allows installation of security tools for professionals</li>
+                                                        </ul>
+                                                    </li>
+                                                    
+                                                    <li>🖥️ <strong style="font-weight:bold;">Flexible Hardware Support:</strong>
+                                                        <ul>
+                                                            <li><strong style="font-weight:bold;">Versatile Compatibility:</strong> From HP mini-PCs to DL/ML/BL server series</li>
+                                                            <li><strong style="font-weight:bold;">Right-Sized Builds:</strong> Hardware selection based on actual needs</li>
+                                                        </ul>
+                                                    </li>
+                                                    
+                                                    <li>⚙️ <strong style="font-weight:bold;">System-level Optimization:</strong>
+                                                        <ul>
+                                                            <li><strong style="font-weight:bold;">Optimized Stack:</strong> Software and OS tuned for media tasks</li>
+                                                            <li><strong style="font-weight:bold;">Low Resource Usage:</strong> Smooth performance on mid-range hardware</li>
+                                                            <li><strong style="font-weight:bold;">High Stability:</strong> Stable operation even under load</li>
+                                                        </ul>
+                                                    </li>
+                                                    
+                                                    <li>🔄 <strong style="font-weight:bold;">Upgradeable & Customizable Architecture:</strong>
+                                                        <ul>
+                                                            <li><strong style="font-weight:bold;">Modular Design:</strong> Open structure for adding new features</li>
+                                                            <li><strong style="font-weight:bold;">Scalable Resources:</strong> Module and resource upgrade capability</li>
+                                                            <li><strong style="font-weight:bold;">No Lock-In:</strong> Free from platform/software dependencies</li>
+                                                        </ul>
+                                                    </li>
+
+                                                    <li><strong style="font-weight:bold;">Automated media organization:</strong> with metadata fetching</li>
+                                                    <li><strong style="font-weight:bold;">Remote access:</strong> multi-device compatible interface</li>
+                                                    <li><strong style="font-weight:bold;">Optimized for Ubuntu Server:</strong> enhanced by custom KYGnus configurations</li>
+                                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAS Details -->
+
+
+    <!-- Footer -->
+    <div class="footer"> 
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 d-flex flex-wrap justify-content-between">
+                    <div class="footer-col first">
+                        <h6>About KYGnus</h6>
+                        <p class="p-small">Koosha Yeganeh GNU Linux Softwares – Developing open-source solutions since 2023</p>
+                    </div>
+                    <div class="footer-col">
+                        <h6>Technology</h6>
+                        <ul class="list-unstyled p-small">
+                            <li><a href="#">openSUSE Solutions</a></li>
+                            <li><a href="#">BunsenLabs Firewalls</a></li>
+                            <li><a href="#">Custom Development</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h6>Compliance</h6>
+                        <ul class="list-unstyled p-small">
+                            <li><a href="#">WEEE Directive</a></li>
+                            <li><a href="#">RoHS Compliance</a></li>
+                            <li><a href="#">Sustainability Reports</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col fourth">
+                        <h6>Contact</h6>
+                        <p class="p-small">
+                            <strong>Email:</strong> <a href="mailto:kygnus.co@proton.me">kygnus.co@proton.me</a><br>
+                            <strong>Phone:</strong> <a href="tel:+4917682086406">+49 176 82086406</a><br>
+                            <strong>Address:</strong><br>
+                            Mülheimer Straße 28,<br>
+                            Essen, 45145<br>
+                            Germany
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </d
+
+    <!-- Copyright -->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="p-small">Copyright © <a href="#">KYGnus</a> 2023</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/purecounter.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
+</html>
