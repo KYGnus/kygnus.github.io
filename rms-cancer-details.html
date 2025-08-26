@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>RMS-Cancer - AI-Powered Health Diagnostic Application</title>
+  <meta name="description" content="RMS-Cancer: An advanced AI-driven desktop application for diagnosing multiple diseases including brain tumors, lung cancer, kidney diseases, and breast cancer.">
+  <meta name="keywords" content="rms-cancer, health diagnostic, ai medical, deep learning, disease detection, monai, kivy">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .feature-icon {
+      font-size: 1.5rem;
+      margin-right: 10px;
+      color: #2b8c69;
+    }
+    .tech-badge {
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+    .disease-card {
+      border-left: 4px solid #2b8c69;
+      padding: 15px;
+      margin-bottom: 15px;
+      background-color: #f8f9fa;
+    }
+    .application-screenshot {
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+
+<body class="portfolio-details-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <h1 class="sitename">Portfolio</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+      <div class="heading">
+        <div class="container">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1>RMS-Cancer Diagnostic Application</h1>
+              <p class="mb-0">An AI-powered desktop application for comprehensive disease diagnosis using deep learning and machine learning models.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="breadcrumbs">
+        <div class="container">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li class="current">RMS-Cancer Application</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <!-- Portfolio Details Section -->
+    <section id="portfolio-details" class="portfolio-details section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-8">
+            <div class="portfolio-details-slider swiper init-swiper">
+
+              <script type="application/json" class="swiper-config">
+                {
+                  "loop": true,
+                  "speed": 600,
+                  "autoplay": {
+                    "delay": 5000
+                  },
+                  "slidesPerView": "auto",
+                  "pagination": {
+                    "el": ".swiper-pagination",
+                    "type": "bullets",
+                    "clickable": true
+                  }
+                }
+              </script>
+
+              <div class="swiper-wrapper align-items-center">
+                <div class="swiper-slide">
+                  <img src="images/rms-cancer.png" alt="RMS-Cancer Application Dashboard">
+                </div>
+                <div class="swiper-slide">
+                  <img src="images/rms-cancer-breast.png" alt="Breast Cancer Detection Interface">
+                </div>
+                <div class="swiper-slide">
+                  <img src="images/rms-cancer-lung.png" alt="Lung Cancer Prediction">
+                </div>
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+            
+            <div class="mt-4" data-aos="fade-up" data-aos-delay="200">
+              <h3>RMS-Cancer Features</h3>
+              <p>Advanced AI-driven desktop application for comprehensive medical diagnosis using deep learning and machine learning models.</p>
+              <ul>
+                <li><strong>🧠 Brain Tumor Detection:</strong> Utilizes MONAI deep learning framework for accurate brain tumor detection and classification</li>
+                <li><strong>🫁 Lung Cancer Prediction:</strong> Employs deep learning techniques to analyze lung CT scans and predict cancer likelihood</li>
+                <li><strong>🦷 Kidney Disease Diagnosis:</strong> Detects kidney tumors and stones using specialized deep learning models</li>
+                <li><strong>🎀 Breast Cancer Detection:</strong> Multiple modality support including mammography and ultrasonography analysis</li>
+                <li><strong>🤖 AI-Powered Analysis:</strong> Combines deep learning (MONAI/PyTorch) and traditional machine learning (scikit-learn)</li>
+                <li><strong>💻 Cross-Platform Compatibility:</strong> Built with Kivy framework for Windows, macOS, and Linux support</li>
+                <li><strong>📊 High Accuracy Diagnostics:</strong> Utilizes carefully trained models on extensive medical datasets</li>
+                <li><strong>👨‍💻 User-Friendly Interface:</strong> Intuitive design for healthcare professionals</li>
+                <li><strong>🖼️ Medical Imaging Support:</strong> Handles DICOM and other medical image formats</li>
+                <li><strong>📈 Performance Metrics:</strong> Detailed reporting with accuracy, precision, and recall metrics</li>
+                <li><strong>🔒 Data Security:</strong> Local processing ensures patient data privacy</li>
+                <li><strong>🔄 Multi-Modal Analysis:</strong> Supports different imaging techniques for comprehensive diagnosis</li>
+                <li><strong>📋 Results Export:</strong> Generate diagnostic reports for medical records</li>
+                <li><strong>⚡ Real-time Processing:</strong> Quick analysis and results delivery</li>
+              </ul>
+              <p class="text-warning">CUSTOM configurations available for specific medical institutions</p>
+              <div class="d-flex flex-wrap gap-2 mt-4">
+                <a href="#" class="btn btn-outline-primary">Download Application</a>
+                <a href="#" class="btn btn-outline-primary">View Documentation</a>
+                <a href="#" class="btn btn-outline-primary">Request Demo</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="portfolio-info" data-aos="fade-up" data-aos-delay="200">
+              <h3>Project information</h3>
+              <ul>
+                <li><strong>Category</strong>: Healthcare AI / Desktop Application</li>
+                <li><strong>Technologies</strong>: 
+                  <div class="mt-2">
+                    <span class="badge bg-success tech-badge">Python</span>
+                    <span class="badge bg-success tech-badge">Kivy</span>
+                    <span class="badge bg-success tech-badge">MONAI</span>
+                    <span class="badge bg-success tech-badge">PyTorch</span>
+                    <span class="badge bg-success tech-badge">scikit-learn</span>
+                    <span class="badge bg-success tech-badge">Deep Learning</span>
+                    <span class="badge bg-success tech-badge">Medical Imaging</span>
+                  </div>
+                </li>
+                <li><strong>Project Date</strong>: April 2025</li>
+                <li><strong>Project URL</strong>: <a href="#">https://github.com/yourusername/rms-cancer</a></li>
+              </ul>
+            </div>
+            <div class="portfolio-description" data-aos="fade-up" data-aos-delay="300">
+              <h2>AI-Powered Medical Diagnostics</h2>
+              <p>
+                RMS-Cancer is an advanced, AI-driven desktop application designed to assist healthcare professionals in diagnosing multiple diseases through state-of-the-art deep learning and machine learning models. The application provides a unified platform for comprehensive medical image analysis and disease prediction.
+              </p>
+              <p>
+                Built on the robust MONAI framework for medical AI and featuring a cross-platform Kivy interface, RMS-Cancer brings cutting-edge diagnostic capabilities to medical professionals worldwide. The system combines the precision of deep learning with the interpretability of traditional machine learning for reliable medical diagnostics.
+              </p>
+            </div>
+            
+            <div class="application-showcase mt-4" data-aos="fade-up" data-aos-delay="400">
+              <h4>Application Interface</h4>
+              <div class="d-flex flex-wrap justify-content-start align-items-start gap-2 mt-3">
+                <img class="img-fluid rounded" style="max-width: 48%;" src="images/rms-cancer-ui1.png" alt="RMS-Cancer Main Interface">
+                <img class="img-fluid rounded" style="max-width: 48%;" src="images/rms-cancer-ui2.png" alt="Diagnosis Results">
+                <img class="img-fluid rounded" style="max-width: 100%;" src="images/rms-cancer-ui3.png" alt="Detailed Analysis View">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Portfolio Details Section -->
+
+  </main>
+
+  <footer id="footer" class="footer dark-background">
+    <div class="container">
+      <h3 class="sitename">Portfolio</h3>
+      <p>Developing AI-powered solutions for healthcare diagnostics and improved patient outcomes.</p>
+      <div class="social-links d-flex justify-content-center">
+        <a href=""><i class="bi bi-github"></i></a>
+        <a href=""><i class="bi bi-linkedin"></i></a>
+        <a href=""><i class="bi bi-twitter-x"></i></a>
+      </div>
+      <div class="container">
+        <div class="copyright">
+          <span>Copyright</span> <strong class="px-1 sitename">Portfolio</strong> <span>All Rights Reserved</span>
+        </div>
+        <div class="credits">
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

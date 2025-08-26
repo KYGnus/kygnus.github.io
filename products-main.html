@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>All Products</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+</head>
+
+<body class="portfolio-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.webp" alt=""> -->
+        <h1 class="sitename" style="color:red;">KYGnus</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products-main.html" class="active">Products</a></li>
+          <li><a href="documents.html">Documents</a></li>
+              <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+      <div class="heading">
+        <div class="container">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1>Products</h1>
+              <p class="mb-0"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="breadcrumbs">
+        <div class="container">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">Portfolio</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio section">
+
+      <div class="container">
+
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+            <li data-filter="*" class="filter-active">All</li>
+            <li data-filter=".filter-app">Storage</li>
+            <li data-filter=".filter-product">Security</li>
+            <li data-filter=".filter-branding">Services</li>
+            <li data-filter=".filter-books">AI</li>
+          </ul><!-- End Portfolio Filters -->
+
+          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <div class="portfolio-content h-100">
+                <img src="images/myNAS.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>NAS Storage</h4>
+                  <p>High-performance network attached storage solution based on openSUSE and BunsenLabs.</p>
+                  <a href="assets/img/portfolio/nas_storage.png" title="NAS" data-gallery="portfolio-gallery-app" ><i class="bi bi-zoom-in"></i></a>
+                  <a href="nas-storage-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <div class="portfolio-content h-100">
+                <img src="./images/guardix.png" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Guardix IDS/IPS Server</h4>
+                  <p>A high-performance Intrusion Detection and Prevention System (IDS/IPS) built on the HP ProLiant DL360 G8, delivering robust network security for enterprises.</p>
+                  <a href="images/ProLiant DL360p Gen8 4LFF.jpg" title="Product 1" data-gallery="portfolio-gallery-product" ><i class="bi bi-zoom-in"></i></a>
+                  <a href="guardix-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+              <div class="portfolio-content h-100">
+                <img src="./images/pulseNET1.png" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>pulseNET</h4>
+                  <p>pulseNET is an audio management and streaming platform built for local networks. It provides a secure, minimal dashboard to manage .mp3 and .flac files with support for DLNA and AirPlay output.</p>
+                  <a href="images/pulsenet_poster.jpg" title="pulseNET"  ><i class="bi bi-zoom-in"></i></a>
+                  <a href="pulseNET-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
+              <div class="portfolio-content h-100">
+                <img src="./images/AquaNET.png" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>AquaNET</h4>
+                  <p>Fish Disease and Weight Prediction with AI</p>
+                  <a href="./images/AquaNET1.png" title="AquaNET"><i class="bi bi-zoom-in"></i></a>
+                  <a href="AquaNET-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <div class="portfolio-content h-100">
+                <img src="images/castbox.png" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>CastBox</h4>
+                  <p>Complete Linux-powered media streaming solution featuring Plex, Jellyfin, and Kodi integration - transforming your system into a professional audio/video content server for local networks or internet streaming.</p>
+                  <a href="images/mediaserver2.png" title="castbox Server" data-gallery="portfolio-gallery-app" ><i class="bi bi-zoom-in"></i></a>
+                  <a href="media-server-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <div class="portfolio-content h-100">
+                <img src="images/clamNET.png" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>clamNET</h4>
+                  <p>A cross-platform, web-based, open-source console for managing and automating ClamAV antivirus across remote Linux and Windows systems. This app provides tools for remote installation, on-demand scanning, database updates, and network topology visualization — all from a single, secure dashboard.</p>
+                  <a href="images/clamNET-ioc.png" title="clamNET IOC" data-gallery="portfolio-gallery-product" ><i class="bi bi-zoom-in"></i></a>
+                  <a href="clamnet-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+              <div class="portfolio-content h-100">
+                <img src="./images/repairdisk.png" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>RepairDisk</h4>
+                  <p>Repair Your harddisk for BadSectors and Repair Filesystems with Our Developed Tool</p>
+                  <a href="./images/repairdisk_CMD.png" title="Branding 2"  ><i class="bi bi-zoom-in"></i></a>
+                  <a href="repair-disk.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
+              <div class="portfolio-content h-100">
+                <img src="images/rms-cancer-main.png" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>RMS-Cancer</h4>
+                  <p>openSOURCE AI Cancer Disease Detection </p>
+                  <a href="./images/rms-cancer.png" title="Branding 2" data-gallery="portfolio-gallery-book" ><i class="bi bi-zoom-in"></i></a>
+                  <a href="rms-cancer-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <div class="portfolio-content h-100">
+                <img src="./images/hermes.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Hermes</h4>
+                  <p>is a comprehensive web-based security management platform designed to remotely monitor and protect Linux servers over SSH. Built for system administrators and cybersecurity professionals, Hermes integrates real-time monitoring, malware detection, and intrusion prevention into a single, centralized interface.</p>
+                  <a href="./images/hermes2.jpg" title="Product 3" data-gallery="portfolio-gallery-product" ><i class="bi bi-zoom-in"></i></a>
+                  <a href="hermes-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <div class="portfolio-content h-100">
+                <img src="./images/poirot.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Poirot</h4>
+                  <p>Poirot is a cross-platform forensic and diagnostics tool with a Flask-based web UI that enables seamless interaction with Android devices using ADB (Android Debug Bridge). It provides a secure and intuitive interface to inspect, manage, and analyze system behavior and applications.</p>
+                  <a href="assets/img/portfolio/portfolio-12.webp" title="Product 3" data-gallery="portfolio-gallery-product" ><i class="bi bi-zoom-in"></i></a>
+                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <div class="portfolio-content h-100">
+                <img src="./images/myhoneypot.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>myHoneyPot</h4>
+                  <p>The KYGnus Honeypot is a high-interaction, multi-layered deception system developed for HP servers to simulate realistic Linux behavior. Designed specifically for enterprise environments, it integrates multiple honeypot layers simultaneously to cover various attack surfaces.</p>
+                  <a><i class="bi bi-zoom-in"></i></a>
+                  <a href="myHoneypot-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <div class="portfolio-content h-100">
+                <img src="./images/firewall.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>myFW</h4>
+                  <p>myFW Transforms any Debian-based Linux server into a powerful, enterprise-ready Unified Threat Management (FW) platform. Built entirely with open-source tools, it integrates multi-layered security, user management, and real-time analytics under one command-line interface.</p>
+                  <a href="./images/myfw1.png" title="Product 3" data-gallery="portfolio-gallery-product" ><i class="bi bi-zoom-in"></i></a>
+                  <a href="myFW-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+              <div class="portfolio-content h-100">
+                <img src="./images/media_server&nas.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Ewaste Prevention</h4>
+                  <p>Our solutions help organizations comply with the EU Waste Electrical and Electronic Equipment </p>
+                  <a><i class="bi bi-zoom-in"></i></a>
+                  <a href="refurbish-Project-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
+              <div class="portfolio-content h-100">
+                <img src="images/EcoMED.png" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>EcoMED</h4>
+                  <p>AI Plant Disease Detection</p>
+                  <a><i class="bi bi-zoom-in"></i></a>
+                  <a href="EcoMED-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+          </div><!-- End Portfolio Container -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Portfolio Section -->
+
+  </main>
+
+  <footer id="footer" class="footer dark-background">
+    <div class="container">
+      <h3 class="sitename">KYGnus</h3>
+      <p>Open Source Solutions & IT Infrastructure Development</p>
+      <div class="social-links d-flex justify-content-center">
+        <a href="https://github.com/KYGnus" target="_blank"><i class="bi bi-github"></i></a>
+        <a href="https://t.me/KYGnus" target="_blank"><i class="bi bi-telegram"></i></a>
+        <a href="https://www.instagram.com/kygnus.co" target="_blank"><i class="bi bi-instagram"></i></a>
+        <a href="mailto:kygnus.co@proton.me"><i class="bi bi-envelope"></i></a>
+      </div>
+      <div class="container">
+        <div class="copyright">
+          <span>Copyright</span> <strong class="px-1 sitename">KYGnus</strong> <span>All Rights Reserved</span>
+        </div>
+        <div class="credits">
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

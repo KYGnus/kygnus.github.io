@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Hermes Security Manager - Linux Server Security Platform</title>
+  <meta name="description" content="Hermes: A comprehensive web-based security management platform for remote monitoring and protection of Linux servers over SSH">
+  <meta name="keywords" content="hermes, linux security, server management, ssh, cybersecurity, clamav, suricata">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .feature-icon {
+      font-size: 1.5rem;
+      margin-right: 10px;
+      color: #6f42c1;
+    }
+    .tech-badge {
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+    .security-card {
+      border-left: 4px solid #6f42c1;
+      padding: 15px;
+      margin-bottom: 15px;
+      background-color: #f8f9fa;
+    }
+  </style>
+</head>
+
+<body class="portfolio-details-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <h1 class="sitename">Portfolio</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+      <div class="heading">
+        <div class="container">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1>Hermes Security Manager</h1>
+              <p class="mb-0">Comprehensive web-based security management platform for remote monitoring and protection of Linux servers</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="breadcrumbs">
+        <div class="container">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li class="current">Hermes Security Manager</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <!-- Portfolio Details Section -->
+    <section id="portfolio-details" class="portfolio-details section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-8">
+            <div class="portfolio-details-slider swiper init-swiper">
+
+              <script type="application/json" class="swiper-config">
+                {
+                  "loop": true,
+                  "speed": 600,
+                  "autoplay": {
+                    "delay": 5000
+                  },
+                  "slidesPerView": "auto",
+                  "pagination": {
+                    "el": ".swiper-pagination",
+                    "type": "bullets",
+                    "clickable": true
+                  }
+                }
+              </script>
+
+              <div class="swiper-wrapper align-items-center">
+                <div class="swiper-slide">
+                  <img src="images/Hermes.png" alt="Antivirus Scanning Interface">
+                </div>
+                <div class="swiper-slide">
+                  <img src="images/Hermes_AV.png" alt="Network Monitoring">
+                </div>
+                <div class="swiper-slide">
+                  <img src="images/Hermes_Process.png" alt="Firewall Management">
+                </div>
+                <div class="swiper-slide">
+                  <img src="images/Hermes_Services.png" alt="Log Management">
+                </div>
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+            
+            <div class="mt-4" data-aos="fade-up" data-aos-delay="200">
+              <h3>Hermes Security Manager Features</h3>
+              <p>Comprehensive web-based security management platform designed to remotely monitor and protect Linux servers over SSH.</p>
+              <ul>
+                <li><strong>📊 Dashboard:</strong> Unified system overview with real-time security status and alerts</li>
+                <li><strong>🛡️ Antivirus Scanning:</strong> Powerful malware detection using ClamAV, RKHunter, chkrootkit, and YARA</li>
+                <li><strong>⚙️ Process Monitoring:</strong> Monitor active processes and identify malicious behavior in real-time</li>
+                <li><strong>🌐 Network Monitoring:</strong> Track active connections and detect suspicious IPs and ports</li>
+                <li><strong>📁 File Integrity Monitoring:</strong> Verify file hashes, detect changes, and quarantine threats automatically</li>
+                <li><strong>📋 Log Management:</strong> View and analyze centralized security logs from multiple systems</li>
+                <li><strong>🔧 Service Management:</strong> Monitor and control services, identify suspicious ones</li>
+                <li><strong>🔥 Firewall Management:</strong> Configure firewall rules and integrate with Fail2Ban for automated protection</li>
+                <li><strong>🧩 Kernel Module Analysis:</strong> Detect and report malicious or vulnerable kernel modules</li>
+                <li><strong>🚨 IDS/IPS Integration:</strong> Built-in Suricata support for intrusion detection and prevention</li>
+                <li><strong>🔐 Authentication:</strong> Secure login system with role-based access control (RBAC)</li>
+                <li><strong>🔍 Real-time Alerts:</strong> Immediate notifications for security events and anomalies</li>
+                <li><strong>📈 Reporting:</strong> Comprehensive security reports and analytics</li>
+                <li><strong>⚡ SSH Integration:</strong> Secure remote management through encrypted SSH connections</li>
+              </ul>
+              <p class="text-warning">100% Open Source – Enterprise-grade security for everyone</p>
+              <div class="d-flex flex-wrap gap-2 mt-4">
+                <a href="https://github.com/KYGnus/Hermes/archive/refs/heads/main.zip" class="btn btn-outline-success">Download Now</a>
+                <a href="https://github.com/KYGnus/Hermes" target="_blank" class="btn btn-outline-primary">View on GitHub</a>
+                <a href="#" class="btn btn-outline-info">View Documentation</a>
+              </div>
+
+              <div class="hardware-showcase mt-4">
+                <h4>Compatible Hardware</h4>
+                <div class="d-flex flex-wrap justify-content-start align-items-start gap-2 mt-3">
+                  <img class="img-fluid rounded" style="max-width: 30%;" src="images/SanDisk SDCZ600-032G-G35 Cruzer Glide 3.0.jpg" alt="SanDisk Cruzer Glide 3.0">
+                  <img class="img-fluid rounded" style="max-width: 30%;" src="images/server-rack.jpg" alt="Server Rack">
+                  <img class="img-fluid rounded" style="max-width: 30%;" src="images/linux-server.jpg" alt="Linux Server">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="portfolio-info" data-aos="fade-up" data-aos-delay="200">
+              <h3>Project Information</h3>
+              <ul>
+                <li><strong>Category</strong>: Cybersecurity / Server Management</li>
+                <li><strong>Technologies</strong>: 
+                  <div class="mt-2">
+                    <span class="badge bg-primary tech-badge">Linux</span>
+                    <span class="badge bg-primary tech-badge">SSH</span>
+                    <span class="badge bg-primary tech-badge">ClamAV</span>
+                    <span class="badge bg-primary tech-badge">Suricata</span>
+                    <span class="badge bg-primary tech-badge">Web Interface</span>
+                    <span class="badge bg-primary tech-badge">RKHunter</span>
+                    <span class="badge bg-primary tech-badge">YARA</span>
+                    <span class="badge bg-primary tech-badge">Fail2Ban</span>
+                  </div>
+                </li>
+                <li><strong>Project Date</strong>: Ongoing</li>
+                <li><strong>Project URL</strong>: <a href="https://github.com/KYGnus/Hermes" target="_blank">https://github.com/KYGnus/Hermes</a></li>
+                <li><strong>License</strong>: Open Source</li>
+              </ul>
+            </div>
+            <div class="portfolio-description" data-aos="fade-up" data-aos-delay="300">
+              <h2>Enterprise-Grade Linux Security</h2>
+              <p>
+                Hermes is a comprehensive web-based security management platform designed to remotely monitor and protect Linux servers over SSH. 
+                Built for system administrators and cybersecurity professionals, Hermes integrates real-time monitoring, malware detection, 
+                and intrusion prevention into a single, centralized interface.
+              </p>
+              <p>
+                With support for industry-standard security tools like ClamAV, Suricata, RKHunter, and YARA, Hermes provides enterprise-grade 
+                security capabilities accessible through an intuitive web interface. The platform offers role-based access control, real-time 
+                alerts, and comprehensive reporting for complete server security management.
+              </p>
+            </div>
+            
+            <div class="security-features mt-4" data-aos="fade-up" data-aos-delay="400">
+              <h4>Security Integrations</h4>
+              <div class="d-flex flex-wrap justify-content-start align-items-start gap-2 mt-3">
+                <img class="img-fluid rounded" style="max-width: 30%;" src="images/clamav-logo.png" alt="ClamAV">
+                <img class="img-fluid rounded" style="max-width: 30%;" src="images/suricata-logo.png" alt="Suricata">
+                <img class="img-fluid rounded" style="max-width: 30%;" src="images/fail2ban-logo.png" alt="Fail2Ban">
+                <img class="img-fluid rounded" style="max-width: 30%;" src="images/yara-logo.png" alt="YARA">
+                <img class="img-fluid rounded" style="max-width: 30%;" src="images/rkhunter-logo.png" alt="RKHunter">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Portfolio Details Section -->
+
+  </main>
+
+  <footer id="footer" class="footer dark-background">
+    <div class="container">
+      <h3 class="sitename">Portfolio</h3>
+      <p>Developing comprehensive security solutions for Linux server environments.</p>
+      <div class="social-links d-flex justify-content-center">
+        <a href=""><i class="bi bi-github"></i></a>
+        <a href=""><i class="bi bi-linkedin"></i></a>
+        <a href=""><i class="bi bi-twitter-x"></i></a>
+      </div>
+      <div class="container">
+        <div class="copyright">
+          <span>Copyright</span> <strong class="px-1 sitename">Portfolio</strong> <span>All Rights Reserved</span>
+        </div>
+        <div class="credits">
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

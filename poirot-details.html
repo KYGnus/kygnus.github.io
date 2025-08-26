@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Poirot - Android Forensic Analysis Tool</title>
+  <meta name="description" content="Poirot: Cross-platform forensic and diagnostics tool with Flask-based web UI for Android device analysis using ADB">
+  <meta name="keywords" content="poirot, android forensic, adb tool, usb app, mobile analysis, flask web ui">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .feature-icon {
+      font-size: 1.5rem;
+      margin-right: 10px;
+      color: #e74c3c;
+    }
+    .tech-badge {
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+    .forensic-card {
+      border-left: 4px solid #e74c3c;
+      padding: 15px;
+      margin-bottom: 15px;
+      background-color: #f8f9fa;
+    }
+    .app-screenshot {
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin: 5px;
+    }
+  </style>
+</head>
+
+<body class="portfolio-details-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <h1 class="sitename">Portfolio</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+      <div class="heading">
+        <div class="container">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1>Poirot Android Analyzer</h1>
+              <p class="mb-0">Cross-platform forensic and diagnostics tool with Flask-based web UI for Android device analysis</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="breadcrumbs">
+        <div class="container">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li class="current">Poirot Android Analyzer</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <!-- Portfolio Details Section -->
+    <section id="portfolio-details" class="portfolio-details section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-8">
+            <div class="portfolio-details-slider swiper init-swiper">
+
+              <script type="application/json" class="swiper-config">
+                {
+                  "loop": true,
+                  "speed": 600,
+                  "autoplay": {
+                    "delay": 5000
+                  },
+                  "slidesPerView": "auto",
+                  "pagination": {
+                    "el": ".swiper-pagination",
+                    "type": "bullets",
+                    "clickable": true
+                  }
+                }
+              </script>
+
+              <div class="swiper-wrapper align-items-center">
+                <div class="swiper-slide">
+                  <img src="images/poirot.jpg" alt="Poirot Android Analyzer Interface">
+                </div>
+                <div class="swiper-slide">
+                  <img src="images/poirot1.png" alt="System Information View">
+                </div>
+                <div class="swiper-slide">
+                  <img src="images/poirot2.png" alt="App Permissions Analysis">
+                </div>
+                <div class="swiper-slide">
+                  <img src="images/poirot-apps.jpg" alt="Installed Apps Management">
+                </div>
+                <div class="swiper-slide">
+                  <img src="images/poirot-permissions.jpg" alt="Permissions Analysis">
+                </div>
+                <div class="swiper-slide">
+                  <img src="images/poirot-forensic.jpg" alt="Forensic Analysis">
+                </div>
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+            
+            <div class="mt-4" data-aos="fade-up" data-aos-delay="200">
+              <h3>Poirot Android Analyzer Features</h3>
+              <p>Cross-platform forensic and diagnostics tool with a Flask-based web UI that enables seamless interaction with Android devices using ADB (Android Debug Bridge).</p>
+              <ul>
+                <li><strong>📱 System Information:</strong> Retrieve details like model, Android version, manufacturer, serial number, battery level, and more</li>
+                <li><strong>📦 List Installed Apps:</strong> View all applications installed on the device with detailed information</li>
+                <li><strong>🗑️ Remove Installed Apps:</strong> Uninstall user apps via package name safely</li>
+                <li><strong>🧹 Remove Default Company Apps:</strong> Clean bloatware like Samsung/Xiaomi system apps</li>
+                <li><strong>🔐 List All Permissions:</strong> Display all available permissions on the device</li>
+                <li><strong>📊 App Permissions Analysis:</strong> Show permissions of any selected application</li>
+                <li><strong>⚠️ Dangerous Permissions Detection:</strong> Automatically identify apps with sensitive permissions</li>
+                <li><strong>⚡ CPU Usage Analysis:</strong> Check what is consuming system CPU resources</li>
+                <li><strong>💾 RAM Usage Analysis:</strong> Identify apps using excessive memory</li>
+                <li><strong>💻 USB Portable Deployment:</strong> Runs directly from USB, no setup required</li>
+                <li><strong>🖥️ Cross-Platform Support:</strong> Compatible with Linux and Windows systems</li>
+                <li><strong>🌐 Web-Based Interface:</strong> Flask-based intuitive web UI for easy operation</li>
+                <li><strong>🔍 Forensic Capabilities:</strong> Designed for digital forensic analysis</li>
+                <li><strong>🛡️ Safe Operation:</strong> Non-destructive analysis and controlled app removal</li>
+              </ul>
+              
+              <div class="application-showcase mt-4">
+                <h4>Application Interface</h4>
+                <div class="d-flex flex-wrap justify-content-start align-items-start gap-2 mt-3">
+                  <img class="app-screenshot" style="max-width: 45%;" src="images/poirot1.png" alt="System Information">
+                  <img class="app-screenshot" style="max-width: 45%;" src="images/poirot2.png" alt="Permissions Analysis">
+                </div>
+              </div>
+
+              <div class="hardware-showcase mt-4">
+                <h4>Available on SanDisk USB</h4>
+                <div class="d-flex flex-wrap justify-content-start align-items-start gap-2 mt-3">
+                  <img class="img-fluid rounded" style="max-width: 30%;" src="images/SanDisk SDCZ600-032G-G35 Cruzer Glide 3.0.jpg" alt="SanDisk Cruzer Glide 3.0">
+                </div>
+                <a href="https://www.ebay.de/itm/396857815297" class="btn btn-outline-primary mt-3">
+                  <strong>Buy on SanDisk USB Flash Drive</strong>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="portfolio-info" data-aos="fade-up" data-aos-delay="200">
+              <h3>Project Information</h3>
+              <ul>
+                <li><strong>Category</strong>: Forensic Tools / Mobile Analysis</li>
+                <li><strong>Technologies</strong>: 
+                  <div class="mt-2">
+                    <span class="badge bg-danger tech-badge">Python</span>
+                    <span class="badge bg-danger tech-badge">Flask</span>
+                    <span class="badge bg-danger tech-badge">ADB</span>
+                    <span class="badge bg-danger tech-badge">Android</span>
+                    <span class="badge bg-danger tech-badge">Web UI</span>
+                    <span class="badge bg-danger tech-badge">Forensic</span>
+                    <span class="badge bg-danger tech-badge">Cross-Platform</span>
+                  </div>
+                </li>
+                <li><strong>Project Date</strong>: Ongoing</li>
+                <li><strong>Platforms</strong>: Linux, Windows</li>
+                <li><strong>Deployment</strong>: USB Portable</li>
+              </ul>
+            </div>
+            <div class="portfolio-description" data-aos="fade-up" data-aos-delay="300">
+              <h2>Portable Android Forensic Analysis</h2>
+              <p>
+                Poirot is a cross-platform forensic and diagnostics tool with a Flask-based web UI that enables seamless interaction 
+                with Android devices using ADB (Android Debug Bridge). It provides a secure and intuitive interface to inspect, manage, 
+                and analyze system behavior and applications.
+              </p>
+              <p>
+                Designed for both Linux and Windows, Poirot runs directly from a USB disk without requiring installation. This makes 
+                it ideal for forensic analysts, IT administrators, and power users who need a portable and powerful toolset for 
+                Android device analysis and management.
+              </p>
+            </div>
+            
+            <div class="use-cases mt-4" data-aos="fade-up" data-aos-delay="400">
+              <h4>Ideal For</h4>
+              <div class="forensic-card">
+                <h6>Digital Forensics Experts</h6>
+                <p class="small">Device analysis and evidence collection</p>
+              </div>
+              <div class="forensic-card">
+                <h6>IT Administrators</h6>
+                <p class="small">Enterprise device management and auditing</p>
+              </div>
+              <div class="forensic-card">
+                <h6>Security Researchers</h6>
+                <p class="small">App behavior analysis and permission auditing</p>
+              </div>
+              <div class="forensic-card">
+                <h6>Power Users</h6>
+                <p class="small">Device optimization and bloatware removal</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Portfolio Details Section -->
+
+  </main>
+
+  <footer id="footer" class="footer dark-background">
+    <div class="container">
+      <h3 class="sitename">Portfolio</h3>
+      <p>Developing innovative forensic and diagnostic tools for modern devices.</p>
+      <div class="social-links d-flex justify-content-center">
+        <a href=""><i class="bi bi-github"></i></a>
+        <a href=""><i class="bi bi-linkedin"></i></a>
+        <a href=""><i class="bi bi-twitter-x"></i></a>
+      </div>
+      <div class="container">
+        <div class="copyright">
+          <span>Copyright</span> <strong class="px-1 sitename">Portfolio</strong> <span>All Rights Reserved</span>
+        </div>
+        <div class="credits">
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
