@@ -1,0 +1,858 @@
+#!/usr/bin/env bash
+#
+# TuxShield - Complete Linux Security Scanner
+# Tools: ClamAV, Maldet, Rkhunter, Chkrootkit, Lynis, Nuclei, SemanticsAV
+# Version: 9.0 - Full toolset with live logs
+
+set -euo pipefail
+
+# Global variables
+LOG_FILE="/var/log/tuxshield.log"
+VERSION="9.0"
+TEMP_DIR="/tmp/tuxshield_$$"
+RESULTS_DIR="/var/log/tuxshield"
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+MAGENTA='\033[0;35m'
+NC='\033[0m'
+
+# Get the REAL user (even when running with sudo)
+REAL_USER="${SUDO_USER:-$USER}"
+REAL_HOME=$(eval echo "~$REAL_USER")
+
+# Logging
+log() {
+    local level="$1"
+    shift
+    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+    
+    case "$level" in
+        "INFO")  echo -e "${GREEN}[INFO]${NC} $*" ;;
+        "WARN")  echo -e "${YELLOW}[WARN]${NC} $*" ;;
+        "ERROR") echo -e "${RED}[ERROR]${NC} $*" ;;
+        "STEP")  echo -e "${BLUE}[STEP]${NC} $*" ;;
+        "SUCCESS") echo -e "${GREEN}[✓]${NC} $*" ;;
+        *)       echo -e "$*" ;;
+    esac
+    
+    echo "[$timestamp] [$level] $*" >> "$LOG_FILE"
+}
+
+# ============ TOOL DETECTION ============
+
+# Find SemanticsAV binary
+find_semanticsav() {
+    if [[ -f "$REAL_HOME/.local/bin/semantics-av" ]]; then
+        echo "$REAL_HOME/.local/bin/semantics-av"
+        return
+    fi
+    if command -v semantics-av >/dev/null 2>&1; then
+        echo "$(command -v semantics-av)"
+        return
+    fi
+    echo ""
+}
+
+# Find Nuclei binary
+find_nuclei() {
+    if command -v nuclei >/dev/null 2>&1; then
+        echo "$(command -v nuclei)"
+        return
+    fi
+    if [[ -f "/usr/local/bin/nuclei" ]]; then
+        echo "/usr/local/bin/nuclei"
+        return
+    fi
+    if [[ -f "./nuclei" ]]; then
+        echo "$(pwd)/nuclei"
+        return
+    fi
+    echo ""
+}
+
+# Find Nuclei templates
+find_nuclei_templates() {
+    if [[ -d "./nuclei-templates" ]]; then
+        echo "$(pwd)/nuclei-templates"
+        return
+    fi
+    if [[ -d "$REAL_HOME/nuclei-templates" ]]; then
+        echo "$REAL_HOME/nuclei-templates"
+        return
+    fi
+    echo ""
+}
+
+# ============ SCAN FUNCTIONS ============
+
+# 1. ClamAV Scan
+run_clamav_scan() {
+    local target="$1"
+    local output_file="$2"
+    
+    log "INFO" "ClamAV scanning: $target"
+    echo ""
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${CYAN}  🦠 ClamAV Antivirus Scan${NC}"
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo ""
+    
+    sudo clamscan --infected --recursive \
+        --max-files=0 \
+        --max-scansize=0 \
+        --max-filesize=0 \
+        "$target" 2>&1 | tee "$output_file"
+    
+    echo ""
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    
+    local infected=$(grep -c "FOUND" "$output_file" 2>/dev/null || echo "0")
+    local scanned=$(grep "Scanned files" "$output_file" 2>/dev/null | awk '{print $3}' | head -1)
+    
+    echo ""
+    echo -e "${GREEN}📊 ClamAV Summary:${NC}"
+    echo "   Files scanned: $scanned"
+    echo "   Infected files: $infected"
+    
+    if [[ $infected -gt 0 ]]; then
+        echo ""
+        echo -e "${RED}⚠️  Infected files:${NC}"
+        grep "FOUND" "$output_file"
+    fi
+}
+
+# 2. Maldet (Linux Malware Detect) Scan
+run_maldet_scan() {
+    local target="$1"
+    local output_file="$2"
+    
+    if ! command -v maldet >/dev/null 2>&1; then
+        log "WARN" "Maldet not installed, skipping"
+        return 1
+    fi
+    
+    log "INFO" "Maldet scanning: $target"
+    echo ""
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${CYAN}  🔍 Linux Malware Detect (Maldet) Scan${NC}"
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo ""
+    
+    sudo maldet -a "$target" 2>&1 | tee "$output_file"
+    
+    echo ""
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    
+    local infected=$(grep -c "TOTAL HITS" "$output_file" 2>/dev/null | awk -F': ' '{print $2}' || echo "0")
+    local scanned=$(grep "SCAN SUMMARY" "$output_file" 2>/dev/null | head -1)
+    
+    echo ""
+    echo -e "${GREEN}📊 Maldet Summary:${NC}"
+    echo "   $scanned"
+}
+
+# 3. Rkhunter Scan
+run_rkhunter_scan() {
+    local output_file="$1"
+    
+    if ! command -v rkhunter >/dev/null 2>&1; then
+        log "WARN" "Rkhunter not installed, skipping"
+        return 1
+    fi
+    
+    echo ""
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${CYAN}  🔒 Rootkit Hunter (Rkhunter) Scan${NC}"
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo ""
+    
+    # Update first
+    sudo rkhunter --update >/dev/null 2>&1
+    
+    # Run check
+    sudo rkhunter --check --skip-keypress --report-warnings-only 2>&1 | tee "$output_file"
+    
+    echo ""
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    
+    local warnings=$(grep -c "Warning" "$output_file" 2>/dev/null || echo "0")
+    
+    echo ""
+    echo -e "${GREEN}📊 Rkhunter Summary:${NC}"
+    echo "   Warnings found: $warnings"
+    
+    if [[ $warnings -gt 0 ]]; then
+        echo ""
+        echo -e "${YELLOW}⚠️  Warnings:${NC}"
+        grep "Warning" "$output_file"
+    fi
+}
+
+# 4. Chkrootkit Scan
+run_chkrootkit_scan() {
+    local output_file="$1"
+    
+    if ! command -v chkrootkit >/dev/null 2>&1; then
+        log "WARN" "Chkrootkit not installed, skipping"
+        return 1
+    fi
+    
+    echo ""
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${CYAN}  🔒 Chkrootkit Rootkit Scanner${NC}"
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo ""
+    
+    sudo chkrootkit -q 2>&1 | tee "$output_file"
+    
+    echo ""
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    
+    local infected=$(grep -c "INFECTED" "$output_file" 2>/dev/null || echo "0")
+    
+    echo ""
+    echo -e "${GREEN}📊 Chkrootkit Summary:${NC}"
+    echo "   Potential infections: $infected"
+    
+    if [[ $infected -gt 0 ]]; then
+        echo ""
+        echo -e "${RED}⚠️  Possible infections found!${NC}"
+    fi
+}
+
+# 5. Lynis Security Audit
+run_lynis_scan() {
+    local output_file="$1"
+    
+    if ! command -v lynis >/dev/null 2>&1; then
+        log "WARN" "Lynis not installed, skipping"
+        return 1
+    fi
+    
+    echo ""
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${CYAN}  📊 Lynis Security Audit${NC}"
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo ""
+    
+    sudo lynis audit system --quiet 2>&1 | tee "$output_file"
+    
+    echo ""
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    
+    local suggestions=$(grep -c "suggestion" "$output_file" 2>/dev/null || echo "0")
+    local warnings=$(grep -c "warning" "$output_file" 2>/dev/null || echo "0")
+    
+    echo ""
+    echo -e "${GREEN}📊 Lynis Summary:${NC}"
+    echo "   Suggestions: $suggestions"
+    echo "   Warnings: $warnings"
+}
+
+# 6. Nuclei Scan
+run_nuclei_scan() {
+    local target="$1"
+    local output_file="$2"
+    
+    NUCLEI_BIN=$(find_nuclei)
+    TEMPLATE_DIR=$(find_nuclei_templates)
+    
+    echo ""
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${CYAN}  🌐 Nuclei Vulnerability Scanner${NC}"
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo ""
+    
+    if [[ -z "$NUCLEI_BIN" ]]; then
+        log "ERROR" "Nuclei not found"
+        echo -e "${YELLOW}Install with: sudo $0 --install${NC}"
+        return 1
+    fi
+    
+    if [[ -z "$TEMPLATE_DIR" ]]; then
+        log "ERROR" "Nuclei templates not found"
+        echo -e "${YELLOW}Downloading templates...${NC}"
+        TEMPLATE_DIR="$REAL_HOME/nuclei-templates"
+        sudo -u "$REAL_USER" git clone --depth 1 https://github.com/projectdiscovery/nuclei-templates.git "$TEMPLATE_DIR"
+    fi
+    
+    log "INFO" "Target: $target"
+    
+    sudo "$NUCLEI_BIN" -t "$TEMPLATE_DIR" \
+        -target "$target" \
+        -severity low,medium,high,critical \
+        2>&1 | tee "$output_file"
+    
+    echo ""
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    
+    if [[ -f "$output_file" ]] && [[ -s "$output_file" ]]; then
+        local findings=$(grep -c "\[" "$output_file" 2>/dev/null || echo "0")
+        echo ""
+        echo -e "${GREEN}📊 Nuclei Summary:${NC}"
+        echo "   Findings: $findings"
+    fi
+}
+
+# 7. SemanticsAV Scan
+run_semanticsav_scan() {
+    local target="$1"
+    local output_file="$2"
+    
+    SEMANTIC_BIN=$(find_semanticsav)
+    
+    echo ""
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${CYAN}  🤖 SemanticsAV AI Malware Scanner${NC}"
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo ""
+    
+    if [[ -z "$SEMANTIC_BIN" ]]; then
+        log "ERROR" "SemanticsAV not found"
+        echo -e "${YELLOW}Install with: sudo $0 --install${NC}"
+        return 1
+    fi
+    
+    if [[ ! -e "$target" ]]; then
+        log "ERROR" "Target does not exist: $target"
+        return 1
+    fi
+    
+    log "INFO" "Target: $target"
+    
+    sudo -u "$REAL_USER" "$SEMANTIC_BIN" scan "$target" -r 2>&1 | tee "$output_file"
+    
+    echo ""
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    
+    if [[ -f "$output_file" ]]; then
+        local total_files=$(grep -c "^(" "$output_file" 2>/dev/null || echo "0")
+        local unsupported=$(grep -c "UNSUPPORTED" "$output_file" 2>/dev/null || echo "0")
+        
+        echo ""
+        echo -e "${GREEN}📊 SemanticsAV Summary:${NC}"
+        echo "   Files processed: $total_files"
+        echo "   Unsupported: $unsupported"
+    fi
+}
+
+# ============ MAIN COMMANDS ============
+
+# Full system scan with ALL 7 tools
+cmd_full_scan() {
+    local target="${1:-/}"
+    local timestamp=$(date +%Y%m%d_%H%M%S)
+    local results="$RESULTS_DIR/full_scan_$timestamp"
+    mkdir -p "$results"
+    
+    clear
+    echo -e "${CYAN}╔════════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${CYAN}║     TuxShield Complete Security Scan (7 Tools) v$VERSION      ║${NC}"
+    echo -e "${CYAN}╚════════════════════════════════════════════════════════════╝${NC}"
+    echo ""
+    log "INFO" "Running as: $REAL_USER"
+    log "INFO" "Target: $target"
+    log "INFO" "Results: $results"
+    
+    # 1. ClamAV
+    log "STEP" "[1/7] ClamAV Antivirus Scan"
+    run_clamav_scan "$target" "$results/clamav.log"
+    
+    # 2. Maldet
+    log "STEP" "[2/7] Linux Malware Detect Scan"
+    run_maldet_scan "$target" "$results/maldet.log"
+    
+    # 3. Rkhunter
+    log "STEP" "[3/7] Rootkit Hunter Scan"
+    run_rkhunter_scan "$results/rkhunter.log"
+    
+    # 4. Chkrootkit
+    log "STEP" "[4/7] Chkrootkit Scan"
+    run_chkrootkit_scan "$results/chkrootkit.log"
+    
+    # 5. Lynis
+    log "STEP" "[5/7] Lynis Security Audit"
+    run_lynis_scan "$results/lynis.log"
+    
+    # 6. Nuclei
+    log "STEP" "[6/7] Nuclei Vulnerability Scan"
+    run_nuclei_scan "127.0.0.1" "$results/nuclei.log"
+    
+    # 7. SemanticsAV
+    log "STEP" "[7/7] SemanticsAV AI Scan"
+    run_semanticsav_scan "$target" "$results/semanticsav.log"
+    
+    echo ""
+    echo -e "${GREEN}╔════════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${GREEN}║                    SCAN COMPLETE!                         ║${NC}"
+    echo -e "${GREEN}╚════════════════════════════════════════════════════════════╝${NC}"
+    echo ""
+    echo -e "All results saved to: ${CYAN}$results${NC}"
+    echo ""
+    echo -e "Quick view:"
+    echo "  cat $results/clamav.log      # ClamAV results"
+    echo "  cat $results/maldet.log      # Maldet results"
+    echo "  cat $results/rkhunter.log    # Rkhunter warnings"
+    echo "  cat $results/chkrootkit.log  # Chkrootkit findings"
+    echo "  cat $results/lynis.log       # Lynis suggestions"
+}
+
+# Quick scan (essential tools only)
+cmd_quick_scan() {
+    local results="$RESULTS_DIR/quick_scan_$(date +%Y%m%d_%H%M%S)"
+    mkdir -p "$results"
+    
+    echo -e "${CYAN}╔════════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${CYAN}║           TuxShield Quick Security Scan                    ║${NC}"
+    echo -e "${CYAN}╚════════════════════════════════════════════════════════════╝${NC}"
+    echo ""
+    
+    # Quick scans - most important for daily use
+    run_clamav_scan "$REAL_HOME" "$results/clamav.log"
+    run_rkhunter_scan "$results/rkhunter.log"
+    run_chkrootkit_scan "$results/chkrootkit.log"
+    
+    echo ""
+    echo -e "${GREEN}✓ Quick scan complete${NC}"
+    echo "  Results: $results"
+}
+
+# Scan specific directory with all tools
+cmd_scan_dir() {
+    local target="$1"
+    local timestamp=$(date +%Y%m%d_%H%M%S)
+    local results="$RESULTS_DIR/scan_${timestamp}"
+    mkdir -p "$results"
+    
+    if [[ "$target" == "~"* ]]; then
+        target="${target/#\~/$REAL_HOME}"
+    fi
+    
+    echo -e "${CYAN}╔════════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${CYAN}║           TuxShield Directory Scan                         ║${NC}"
+    echo -e "${CYAN}╚════════════════════════════════════════════════════════════╝${NC}"
+    echo ""
+    log "INFO" "Target: $target"
+    
+    run_clamav_scan "$target" "$results/clamav.log"
+    run_maldet_scan "$target" "$results/maldet.log"
+    run_semanticsav_scan "$target" "$results/semanticsav.log"
+    
+    echo ""
+    echo -e "${GREEN}✓ Scan complete: $results${NC}"
+}
+
+# Individual tool scans
+cmd_semantics() {
+    local target="$1"
+    local timestamp=$(date +%Y%m%d_%H%M%S)
+    local output="$RESULTS_DIR/semantics_${timestamp}.log"
+    
+    if [[ "$target" == "~"* ]]; then
+        target="${target/#\~/$REAL_HOME}"
+    fi
+    
+    run_semanticsav_scan "$target" "$output"
+    echo -e "${GREEN}✓ Log saved to: $output${NC}"
+}
+
+cmd_nuclei() {
+    local target="$1"
+    local timestamp=$(date +%Y%m%d_%H%M%S)
+    local output="$RESULTS_DIR/nuclei_${timestamp}.log"
+    
+    run_nuclei_scan "$target" "$output"
+    echo -e "${GREEN}✓ Log saved to: $output${NC}"
+}
+
+cmd_clamav() {
+    local target="$1"
+    local timestamp=$(date +%Y%m%d_%H%M%S)
+    local output="$RESULTS_DIR/clamav_${timestamp}.log"
+    
+    if [[ "$target" == "~"* ]]; then
+        target="${target/#\~/$REAL_HOME}"
+    fi
+    
+    run_clamav_scan "$target" "$output"
+    echo -e "${GREEN}✓ Log saved to: $output${NC}"
+}
+
+cmd_maldet() {
+    local target="$1"
+    local timestamp=$(date +%Y%m%d_%H%M%S)
+    local output="$RESULTS_DIR/maldet_${timestamp}.log"
+    
+    if [[ "$target" == "~"* ]]; then
+        target="${target/#\~/$REAL_HOME}"
+    fi
+    
+    run_maldet_scan "$target" "$output"
+    echo -e "${GREEN}✓ Log saved to: $output${NC}"
+}
+
+cmd_rkhunter() {
+    local timestamp=$(date +%Y%m%d_%H%M%S)
+    local output="$RESULTS_DIR/rkhunter_${timestamp}.log"
+    
+    run_rkhunter_scan "$output"
+    echo -e "${GREEN}✓ Log saved to: $output${NC}"
+}
+
+cmd_chkrootkit() {
+    local timestamp=$(date +%Y%m%d_%H%M%S)
+    local output="$RESULTS_DIR/chkrootkit_${timestamp}.log"
+    
+    run_chkrootkit_scan "$output"
+    echo -e "${GREEN}✓ Log saved to: $output${NC}"
+}
+
+cmd_lynis() {
+    local timestamp=$(date +%Y%m%d_%H%M%S)
+    local output="$RESULTS_DIR/lynis_${timestamp}.log"
+    
+    run_lynis_scan "$output"
+    echo -e "${GREEN}✓ Log saved to: $output${NC}"
+}
+
+# Update all tools
+cmd_update() {
+    echo ""
+    echo -e "${CYAN}Updating all security tools...${NC}"
+    echo ""
+    
+    echo -n "  ClamAV: "
+    sudo freshclam 2>/dev/null && echo -e "${GREEN}✓${NC}" || echo -e "${RED}✗${NC}"
+    
+    echo -n "  Maldet: "
+    sudo maldet --update 2>/dev/null && echo -e "${GREEN}✓${NC}" || echo -e "${YELLOW}⚠${NC}"
+    
+    echo -n "  Rkhunter: "
+    sudo rkhunter --update 2>/dev/null && echo -e "${GREEN}✓${NC}" || echo -e "${YELLOW}⚠${NC}"
+    
+    echo -n "  Nuclei templates: "
+    TEMPLATE_DIR=$(find_nuclei_templates)
+    if [[ -n "$TEMPLATE_DIR" ]]; then
+        (cd "$TEMPLATE_DIR" && git pull 2>/dev/null) && echo -e "${GREEN}✓${NC}" || echo -e "${YELLOW}⚠${NC}"
+    else
+        echo -e "${YELLOW}Not installed${NC}"
+    fi
+    
+    echo -n "  SemanticsAV: "
+    SEMANTIC_BIN=$(find_semanticsav)
+    if [[ -n "$SEMANTIC_BIN" ]]; then
+        sudo -u "$REAL_USER" "$SEMANTIC_BIN" update 2>/dev/null && echo -e "${GREEN}✓${NC}" || echo -e "${YELLOW}⚠${NC}"
+    else
+        echo -e "${YELLOW}Not installed${NC}"
+    fi
+    
+    echo ""
+    log "SUCCESS" "Update complete"
+}
+
+# Install all tools
+cmd_install() {
+    echo ""
+    echo -e "${CYAN}Installing all TuxShield security tools...${NC}"
+    echo ""
+    
+    mkdir -p "$TEMP_DIR" "$RESULTS_DIR"
+    
+    # ClamAV
+    echo -n "  ClamAV: "
+    if ! command -v clamscan >/dev/null 2>&1; then
+        if command -v apt >/dev/null 2>&1; then
+            sudo apt update && sudo apt install -y clamav clamav-daemon >/dev/null 2>&1
+        fi
+    fi
+    sudo freshclam >/dev/null 2>&1
+    echo -e "${GREEN}✓${NC}"
+    
+    # Maldet
+    echo -n "  Maldet: "
+    if ! command -v maldet >/dev/null 2>&1; then
+        cd "$TEMP_DIR"
+        wget -q http://www.rfxn.com/downloads/maldetect-current.tar.gz
+        tar xzf maldetect-current.tar.gz
+        cd maldetect-*
+        sudo ./install.sh >/dev/null 2>&1
+        sudo maldet --update >/dev/null 2>&1
+    fi
+    echo -e "${GREEN}✓${NC}"
+    
+    # Rkhunter
+    echo -n "  Rkhunter: "
+    if ! command -v rkhunter >/dev/null 2>&1; then
+        if command -v apt >/dev/null 2>&1; then
+            sudo apt install -y rkhunter >/dev/null 2>&1
+        fi
+    fi
+    sudo rkhunter --propupd >/dev/null 2>&1
+    echo -e "${GREEN}✓${NC}"
+    
+    # Chkrootkit
+    echo -n "  Chkrootkit: "
+    if ! command -v chkrootkit >/dev/null 2>&1; then
+        if command -v apt >/dev/null 2>&1; then
+            sudo apt install -y chkrootkit >/dev/null 2>&1
+        fi
+    fi
+    echo -e "${GREEN}✓${NC}"
+    
+    # Lynis
+    echo -n "  Lynis: "
+    if ! command -v lynis >/dev/null 2>&1; then
+        if command -v apt >/dev/null 2>&1; then
+            sudo apt install -y lynis >/dev/null 2>&1
+        fi
+    fi
+    echo -e "${GREEN}✓${NC}"
+    
+    # Nuclei
+    echo -n "  Nuclei: "
+    sudo rm -f /usr/local/bin/nuclei
+    ARCH=$(uname -m)
+    case "$ARCH" in
+        x86_64) NUCLEI_ARCH="amd64" ;;
+        aarch64) NUCLEI_ARCH="arm64" ;;
+        *) NUCLEI_ARCH="amd64" ;;
+    esac
+    cd "$TEMP_DIR"
+    wget -q https://github.com/projectdiscovery/nuclei/releases/download/v3.8.0/nuclei_3.8.0_linux_${NUCLEI_ARCH}.zip
+    unzip -q nuclei_3.8.0_linux_${NUCLEI_ARCH}.zip
+    sudo mv nuclei /usr/local/bin/
+    sudo chmod +x /usr/local/bin/nuclei
+    sudo -u "$REAL_USER" mkdir -p "$REAL_HOME/nuclei-templates"
+    sudo -u "$REAL_USER" git clone --depth 1 https://github.com/projectdiscovery/nuclei-templates.git "$REAL_HOME/nuclei-templates" >/dev/null 2>&1
+    echo -e "${GREEN}✓${NC}"
+    
+    # SemanticsAV
+    echo -n "  SemanticsAV: "
+    if [[ ! -f "$REAL_HOME/.local/bin/semantics-av" ]]; then
+        sudo -u "$REAL_USER" bash -c "$(curl -sSL https://raw.githubusercontent.com/metaforensics-ai/semantics-av-cli/main/scripts/install.sh)" >/dev/null 2>&1
+        sleep 3
+        sudo -u "$REAL_USER" "$REAL_HOME/.local/bin/semantics-av" config init --defaults >/dev/null 2>&1
+        sudo -u "$REAL_USER" systemctl --user daemon-reload >/dev/null 2>&1
+        sudo -u "$REAL_USER" systemctl --user enable semantics-av >/dev/null 2>&1
+        sudo -u "$REAL_USER" systemctl --user start semantics-av >/dev/null 2>&1
+    fi
+    echo -e "${GREEN}✓${NC}"
+    
+    echo ""
+    echo -e "${GREEN}╔════════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${GREEN}║              ALL TOOLS INSTALLED!                         ║${NC}"
+    echo -e "${GREEN}╚════════════════════════════════════════════════════════════╝${NC}"
+    echo ""
+    echo "Next steps:"
+    echo "  sudo $0 --update      # Update definitions"
+    echo "  sudo $0 --quick       # Quick security scan"
+    echo "  sudo $0 --full        # Complete system scan"
+}
+
+# Status
+cmd_status() {
+    echo ""
+    echo -e "${CYAN}TuxShield v$VERSION - Status Report${NC}"
+    echo -e "${BLUE}════════════════════════════════════════════════════════════${NC}"
+    echo ""
+    
+    echo -e "${GREEN}Installed Tools:${NC}"
+    
+    # ClamAV
+    if command -v clamscan >/dev/null 2>&1; then
+        echo -e "  ${GREEN}✓${NC} ClamAV: $(clamscan --version 2>&1 | head -1 | cut -d' ' -f2)"
+    else
+        echo -e "  ${RED}✗${NC} ClamAV: Not installed"
+    fi
+    
+    # Maldet
+    if command -v maldet >/dev/null 2>&1; then
+        echo -e "  ${GREEN}✓${NC} Maldet: $(maldet --version 2>&1 | head -1)"
+    else
+        echo -e "  ${RED}✗${NC} Maldet: Not installed"
+    fi
+    
+    # Rkhunter
+    if command -v rkhunter >/dev/null 2>&1; then
+        echo -e "  ${GREEN}✓${NC} Rkhunter: $(rkhunter --version 2>&1 | head -1)"
+    else
+        echo -e "  ${RED}✗${NC} Rkhunter: Not installed"
+    fi
+    
+    # Chkrootkit
+    if command -v chkrootkit >/dev/null 2>&1; then
+        echo -e "  ${GREEN}✓${NC} Chkrootkit: installed"
+    else
+        echo -e "  ${RED}✗${NC} Chkrootkit: Not installed"
+    fi
+    
+    # Lynis
+    if command -v lynis >/dev/null 2>&1; then
+        echo -e "  ${GREEN}✓${NC} Lynis: $(lynis --version 2>&1 | head -1)"
+    else
+        echo -e "  ${RED}✗${NC} Lynis: Not installed"
+    fi
+    
+    # Nuclei
+    if command -v nuclei >/dev/null 2>&1; then
+        echo -e "  ${GREEN}✓${NC} Nuclei: $(nuclei -version 2>&1 | head -1)"
+    else
+        echo -e "  ${RED}✗${NC} Nuclei: Not installed"
+    fi
+    
+    # SemanticsAV
+    if [[ -f "$REAL_HOME/.local/bin/semantics-av" ]]; then
+        echo -e "  ${GREEN}✓${NC} SemanticsAV: installed"
+    else
+        echo -e "  ${RED}✗${NC} SemanticsAV: Not installed"
+    fi
+    
+    echo ""
+}
+
+# Help
+show_help() {
+    cat << EOF
+${CYAN}TuxShield v$VERSION - Complete Linux Security Scanner${NC}
+${BLUE}════════════════════════════════════════════════════════════${NC}
+
+${GREEN}TOOLS INCLUDED:${NC}
+  🦠 ClamAV        - Antivirus malware detection
+  🔍 Maldet        - Linux Malware Detect  
+  🔒 Rkhunter      - Rootkit hunter
+  🔒 Chkrootkit    - Rootkit detector
+  📊 Lynis         - Security auditing
+  🌐 Nuclei        - Vulnerability scanner
+  🤖 SemanticsAV   - AI malware detection
+
+${GREEN}COMMANDS:${NC}
+
+  ${YELLOW}SCANS:${NC}
+    sudo $0 --full [PATH]      # Full scan with ALL 7 tools
+    sudo $0 --quick            # Quick scan (essential tools)
+    sudo $0 --scan DIR         # Scan directory with core tools
+
+  ${YELLOW}INDIVIDUAL TOOLS:${NC}
+    sudo $0 --clamav PATH      # ClamAV only
+    sudo $0 --maldet PATH      # Maldet only
+    sudo $0 --rkhunter         # Rkhunter only
+    sudo $0 --chkrootkit       # Chkrootkit only
+    sudo $0 --lynis            # Lynis only
+    sudo $0 --nuclei URL       # Nuclei only
+    sudo $0 --semantics PATH   # SemanticsAV only
+
+  ${YELLOW}MAINTENANCE:${NC}
+    sudo $0 --install          # Install all tools
+    sudo $0 --update           # Update definitions
+    $0 --status                # Show status
+
+${GREEN}EXAMPLES:${NC}
+
+  # Complete system security audit
+  sudo $0 --full
+
+  # Quick daily check
+  sudo $0 --quick
+
+  # Scan downloads folder
+  sudo $0 --scan ~/Downloads
+
+  # Check for rootkits
+  sudo $0 --rkhunter
+  sudo $0 --chkrootkit
+
+  # Scan with AI
+  sudo $0 --semantics ~/Downloads
+
+${BLUE}Logs: $RESULTS_DIR/${NC}
+EOF
+}
+
+# ============ MAIN ============
+
+main() {
+    mkdir -p "$RESULTS_DIR"
+    
+    # Ensure REAL_HOME is set correctly
+    if [[ -z "$REAL_HOME" ]] || [[ "$REAL_HOME" == "/" ]]; then
+        REAL_HOME="/home/$REAL_USER"
+    fi
+    
+    case "${1:-}" in
+        --full|--all)
+            cmd_full_scan "${2:-/}"
+            ;;
+        --quick)
+            cmd_quick_scan
+            ;;
+        --scan)
+            if [[ -z "${2:-}" ]]; then
+                echo "Error: Path required"
+                exit 1
+            fi
+            cmd_scan_dir "$2"
+            ;;
+        --clamav)
+            if [[ -z "${2:-}" ]]; then
+                echo "Error: Path required"
+                exit 1
+            fi
+            cmd_clamav "$2"
+            ;;
+        --maldet)
+            if [[ -z "${2:-}" ]]; then
+                echo "Error: Path required"
+                exit 1
+            fi
+            cmd_maldet "$2"
+            ;;
+        --rkhunter)
+            cmd_rkhunter
+            ;;
+        --chkrootkit)
+            cmd_chkrootkit
+            ;;
+        --lynis)
+            cmd_lynis
+            ;;
+        --nuclei)
+            if [[ -z "${2:-}" ]]; then
+                echo "Error: Target URL required"
+                exit 1
+            fi
+            cmd_nuclei "$2"
+            ;;
+        --semantics)
+            if [[ -z "${2:-}" ]]; then
+                echo "Error: Path required"
+                exit 1
+            fi
+            cmd_semantics "$2"
+            ;;
+        --install)
+            cmd_install
+            ;;
+        --update)
+            cmd_update
+            ;;
+        --status)
+            cmd_status
+            ;;
+        -h|--help)
+            show_help
+            ;;
+        *)
+            show_help
+            exit 1
+            ;;
+    esac
+}
+
+# Run
+trap "rm -rf $TEMP_DIR" EXIT
+main "$@"
