@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Software - KYGnus Downloads</title>
+  <meta name="description" content="Download open-source software and tools from KYGnus. Secure storage, honeypot, pulseNET audio streaming, and more.">
+  <meta name="keywords" content="KYGnus, software download, openNAS, honeypot, security tools, pulseNET, AI medical software">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- Additional custom inline style for consistent card hover and download badge -->
+  <style>
+    .download-badge {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: #ff4a4a;
+      color: #fff;
+      border-radius: 50px;
+      padding: 8px 18px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: 0.3s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 2;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .download-badge:hover {
+      background: #cc0000;
+      transform: translateY(-3px);
+      color: white;
+    }
+    .service-item {
+      padding-bottom: 70px;
+    }
+    .version-tag {
+      font-size: 0.75rem;
+      background: #e9ecef;
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 20px;
+      margin-top: 10px;
+      color: #2c3e50;
+    }
+    .soft-icon {
+      font-size: 2.5rem;
+      color: #ff4a4a;
+      margin-bottom: 15px;
+    }
+    .card-footnote {
+      font-size: 0.8rem;
+      color: #6c757d;
+      margin-top: 12px;
+      border-top: 1px dashed #dee2e6;
+      padding-top: 10px;
+    }
+  </style>
+</head>
+
+<body class="services-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <h1 class="sitename" style="color: red;">KYGnus</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products-main.html">Products</a></li>
+          <li><a href="documents.html">Documents</a></li>
+          <li><a href="Laptops.html">workstation</a></li>
+          <li><a href="softwares.html" class="active">Softwares</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+      <div class="heading">
+        <div class="container">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1>Software Downloads</h1>
+              <p class="mb-0">Explore and download our open-source tools, security suites, audio platforms, and AI utilities. All packages are verified and ready for deployment.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="breadcrumbs">
+        <div class="container">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">Software</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <!-- Software Section (Similar to services but with download actions) -->
+    <section id="software" class="services section">
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <!-- 1. KYGnus openNAS Storage Software -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-item position-relative h-100">
+              <div class="icon">
+                <i class="bi bi-hdd-stack-fill soft-icon"></i>
+              </div>
+              <h3>KYGnus mynas</h3>
+              <p>Enterprise-grade storage software based on Linux. Deploy on old HP servers or personal computers. Includes ZFS, SMB/NFS, and our custom web dashboard for storage provisioning.</p>
+              <div class="version-tag">
+                <i class="bi bi-tag"></i> v1.1.0 (stable)
+              </div>
+              <div class="card-footnote">
+                <i class="bi bi-file-zip"></i> 16K
+              </div>
+              <a href="./apps/mynas_1.0_all.deb" class="download-badge stretched-link" target="_blank">
+                <i class="bi bi-download"></i> .deb package
+              </a>
+            </div>
+          </div>
+
+          <!-- 2. HoneyPot Framework - SentryPot -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-item position-relative h-100">
+              <div class="icon">
+                <i class="bi bi-shield-lock-fill soft-icon"></i>
+              </div>
+              <h3>myfw</h3>
+              <p>Linux Firewalld to Easly Manage your Linux Device Firewall.with this app you can control suricata and Netdata and Fail2ban and </p>
+              <div class="version-tag">
+                <i class="bi bi-tag"></i> v1.1.0 (stable)
+              </div>
+              <div class="card-footnote">
+                <i class="bi bi-box"></i> Debian/Ubuntu .deb · 8k 
+              </div>
+              <a href="./apps/myfw_1.0_all.deb" class="download-badge" target="_blank">
+                <i class="bi bi-download"></i> .deb package
+              </a>
+            </div>
+          </div>
+
+          <!-- 3. KYGnus Security Toolkit CLI -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-item position-relative h-100">
+              <div class="icon">
+                <i class="bi bi-terminal-fill soft-icon"></i>
+              </div>
+              <h3>TuxFix</h3>
+              <p>
+
+                Command-line tool for automatic inspection and repair of Linux systems.
+
+The purpose of this tool is to provide a lightweight mechanism for detecting, reporting, and fixing common system-level issues.
+
+
+              </p>
+              <div class="version-tag">
+                <i class="bi bi-tag"></i> v2.0.0
+              </div>
+              <div class="card-footnote">
+                <i class="bi bi-linux"></i> Linux tar File
+              </div>
+              <a href="./apps/tuxfix.tar.gz" class="download-badge" target="_blank">
+                <i class="bi bi-download"></i> Download .tar.gz
+              </a>
+            </div>
+          </div>
+
+          <!-- 4. pulseNET - High Quality Audio Streaming -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-item position-relative h-100">
+              <div class="icon">
+               <i class="bi bi-terminal-fill soft-icon"></i>
+              </div>
+              <h3>Logman</h3>
+              <p>Logman is an advanced command-line tool for system administrators and DevOps engineers that performs deep forensic analysis of system logs with actionable insights and visualizations.</p>
+              <div class="version-tag">
+                <i class="bi bi-tag"></i> v1.0.1
+              </div>
+              <a href="./apps/logman_2.0_all.deb" class="download-badge" target="_blank">
+                <i class="bi bi-download"></i> .deb package
+              </a>
+            </div>
+          </div>
+
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-item position-relative h-100">
+              <div class="icon">
+               <i class="bi bi-terminal-fill soft-icon"></i>
+              </div>
+              <h3>Logman-Live</h3>
+              <p>logmanLive is an advanced command-line tool for  analysis of system logs Lively</p>
+              <div class="version-tag">
+                <i class="bi bi-tag"></i> v1.0.1
+              </div>
+              <a href="./apps/logman_2.0_all.deb" class="download-badge" target="_blank">
+                <i class="bi bi-download"></i> .deb package
+              </a>
+            </div>
+          </div>
+
+
+
+          <!-- 5. RMS medical AI - Diagnosis Assistant -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-item position-relative h-100">
+              <div class="icon">
+                 <i class="bi bi-terminal-fill soft-icon"></i>
+              </div>
+              <h3>FileZen</h3>
+              <p>A high-performance enterprise file analyzer and optimization tool written in Nim. FileZen scans directories, analyzes file types, estimates optimization potential, and suggests the best compression strategies for maximum storage savings.</p>
+              <div class="version-tag">
+                <i class="bi bi-tag"></i> v1.1.0 (LTS)
+              </div>
+              <div class="card-footnote">
+                <i class="bi bi-windows"></i> Linux · installer
+              </div>
+              <a href="./apps/FileZen" class="download-badge" target="_blank">
+                <i class="bi bi-download"></i> Linux Executable FIle
+              </a>
+            </div>
+          </div>
+
+          <!-- 6. IOC Malware Analyzer (Linux forensic) -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="service-item position-relative h-100">
+              <div class="icon">
+                 <i class="bi bi-terminal-fill soft-icon"></i>
+              </div>
+              <h3>ReparDisk</h3>
+              <p>RepairDisk is a <b>Linux disk repair and health-check script</b> designed for system administrators, IT professionals, and power users.  
+It performs a series of automated checks, repairs, and scans on a given disk device, helping recover data, detect hardware issues, and scan for malware.
+</p>
+              <div class="version-tag">
+                <i class="bi bi-tag"></i> v0.9.4
+              </div>
+                 <a href="./apps/repairdisk-0.0.1-1.noarch.rpm" class="download-badge" target="_blank">
+                <i class="bi bi-download"></i> .rpm package
+                </a>
+                <a href="./apps/repairdisk_1.0_all.deb" class="download-badge" target="_blank">
+                <i class="bi bi-download"></i> .deb package
+                </a>
+            </div>
+          </div>
+
+
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="service-item position-relative h-100">
+              <div class="icon">
+                 <i class="bi bi-terminal-fill soft-icon"></i>
+              </div>
+              <h3>TuxTuner</h3>
+              <p>TuxTuner is an Enterprise Linux Optimization & Hardening Tool designed to improve performance, security, and stability across desktop, server, and embedded Linux systems.
+It supports distribution-specific tuning, enterprise kernel tweaks, service optimization, and security hardening — all from a single script.
+</p>
+              <div class="version-tag">
+                <i class="bi bi-tag"></i> v2.0.0
+              </div>
+                 <a href="./apps/tuxtuner-1.0.0-1.noarch.rpm" class="download-badge" target="_blank">
+                <i class="bi bi-download"></i> .rpm package
+                </a>
+                <a href="./apps/tuxtuner_1.0_all.deb" class="download-badge" target="_blank">
+                <i class="bi bi-download"></i> .deb package
+                </a>
+            </div>
+          </div>
+
+
+
+          <!-- Additional - NAS Management client (Windows/Mac) -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
+            <div class="service-item position-relative h-100">
+              <div class="icon">
+                <i class="bi bi-terminal-fill soft-icon"></i>
+              </div>
+              <h3>backtrack</h3>
+              <p>Backtrack is a robust Python script that automatically monitors a directory for changes and creates regular backups, ensuring your data is always safe. It performs virus scanning using **ClamAV** and **Maldet** before making backups. It checks for file changes every 5 minutes and triggers a backup if there are any new changes, removing the old backup to save space.</p>
+              <div class="version-tag">
+                <i class="bi bi-tag"></i> v2.0.0
+              </div>
+              <div class="card-footnote">
+                <i class="bi bi-apple"></i> Windows, macOS, Linux
+              </div>
+              <a href="./apps/backtrack" class="download-badge" target="_blank">
+                <i class="bi bi-download"></i> Linux Executable
+              </a>
+            </div>
+          </div>
+
+          <!-- 7. KYGnus ZeroTier Controller (Networking) -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="800">
+            <div class="service-item position-relative h-100">
+              <div class="icon">
+                 <i class="bi bi-terminal-fill soft-icon"></i>
+              </div>
+              <h3>permcheck</h3>
+              <p>This app check permisions of all system and create Database.
+if You Running for first Time create database .
+for Running Seccond time compare database with Previos Version.</p>
+              <div class="version-tag">
+                <i class="bi bi-tag"></i> v1.0.0
+              </div>
+              <div class="card-footnote">
+                <i class="bi bi-box"></i> 
+              </div>
+                <a href="./apps/permcheck_1.0_all.deb" class="download-badge" target="_blank">
+                <i class="bi bi-download"></i> .deb package
+                </a>
+            </div>
+          </div>
+
+          <!-- 8. KYGnus Log Detective (SIEM utility) -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="900">
+            <div class="service-item position-relative h-100">
+              <div class="icon">
+                <i class="bi bi-media soft-icon"></i>
+              </div>
+              <h3>FreeCast</h3>
+              <p>Free Media Server. change Your Device as Linux Based Media Server easly</p>
+              <div class="version-tag">
+                <i class="bi bi-tag"></i> v1.0.0
+              </div>
+              <div class="card-footnote">
+                <i class="bi bi-github"></i> Python + Web UI ( Flask )
+              </div>
+              <a href="./apps/freecast_1.0.0_amd64.deb" class="download-badge" target="_blank">
+                <i class="bi bi-download"></i> .deb
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Download notice & additional info row -->
+        <div class="row mt-5 pt-4" data-aos="fade-up">
+          <div class="col-12 text-center">
+            <div class="alert alert-light border shadow-sm d-inline-block p-4 rounded-4" role="alert">
+              <i class="bi bi-check-circle-fill text-success me-2"></i> All software is open-source (GPLv3 / MIT) unless stated.
+              <br><small>🔐 GPG signatures and SHA256 checksums available in each GitHub release. We recommend verifying integrity before installation.</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter by category or Extra info if needed: repository mirrors -->
+        <div class="row mt-3">
+          <div class="col-lg-12">
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+              <a href="https://github.com/KYGnus" target="_blank" class="btn btn-outline-dark rounded-pill"><i class="bi bi-github"></i> Visit GitHub organization</a>
+              <a href="documents.html" class="btn btn-outline-danger rounded-pill"><i class="bi bi-file-earmark-text"></i> Product Documents</a>
+              <a href="contact.html" class="btn btn-outline-secondary rounded-pill"><i class="bi bi-envelope"></i> Request older versions</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- /Software Section -->
+
+  </main>
+
+  <footer id="footer" class="footer dark-background">
+    <div class="container">
+      <h3 class="sitename">KYGnus</h3>
+      <p>Open Source Solutions & IT Infrastructure Development</p>
+      <div class="social-links d-flex justify-content-center">
+        <a href="https://github.com/KYGnus" target="_blank"><i class="bi bi-github"></i></a>
+        <a href="https://t.me/KYGnus" target="_blank"><i class="bi bi-telegram"></i></a>
+        <a href="https://www.instagram.com/kygnus.co" target="_blank"><i class="bi bi-instagram"></i></a>
+        <a href="mailto:kygnus.co@proton.me"><i class="bi bi-envelope"></i></a>
+      </div>
+      <div class="container">
+        <div class="copyright">
+          <span>Copyright</span> <strong class="px-1 sitename">KYGnus</strong> <span>All Rights Reserved</span>
+        </div>
+        <div class="credits">
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+  
+  <!-- Optional: Initialize AOS manually (main.js does, but safer) -->
+  <script>
+    (function() {
+      if (typeof AOS !== 'undefined') {
+        AOS.init({ duration: 600, once: true });
+      }
+    })();
+  </script>
+
+</body>
+
+</html>
